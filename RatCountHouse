@@ -1,0 +1,61 @@
+package com.company;
+import java.util.*;
+
+public class Main {
+    public static int RatCount(int r, int unit, int[] arr) {
+        // Check if the array is null
+        if (arr == null) {
+            return -1;  // Return -1 if array is null
+        }
+
+        // Calculate the total food required
+        int totfood = r * unit;
+        int accumulatedfood = 0;
+
+        // Iterate over the array and accumulate food
+        for (int i = 0; i < arr.length; i++) {
+            accumulatedfood += arr[i];
+
+            // Check if the accumulated food is enough for all the rats
+            if (accumulatedfood >= totfood) {
+                return i + 1;  // Return the number of houses needed (i + 1 because index is 0-based)
+            }
+        }
+
+        // If not enough food is found, return 0
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of rats:");
+        int r = sc.nextInt();               // Number of rats
+
+        System.out.println("Enter the units of food each rat consumes:");
+        int unit = sc.nextInt();            // Units of food each rat consumes
+
+        System.out.println("Enter the number of houses:");
+        int n = sc.nextInt();               // Number of houses
+
+        // Validate the number of houses
+        if (n <= 0) {
+            System.out.println("Invalid number of houses.");
+            sc.close();
+            return;
+        }
+
+        int[] arr = new int[n];  // Dynamically allocate array size based on user input
+
+        System.out.println("Enter the amount of food in each house:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        // Call the function and print the result
+        int result = RatCount(r, unit, arr);
+        System.out.println(result);
+
+        sc.close();
+    }
+}
